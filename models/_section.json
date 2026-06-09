@@ -50,7 +50,9 @@
         "hero",
         "cards",
         "columns",
-        "fragment"
+        "fragment",
+        "video",
+        "content-fragments"
       ]
     }
   ]

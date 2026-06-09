@@ -45,6 +45,14 @@ export function moveInstrumentation(from, to) {
   );
 }
 
+export function isAuthorEnvironment() {
+  if (window?.location?.origin?.includes('author')) {
+    return true;
+  }
+
+  return false;
+}
+
 /**
  * load fonts.css and set a session storage flag
  */

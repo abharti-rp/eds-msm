@@ -1,9 +1,9 @@
-# Your Project's Title...
-Your project's description...
+# EDS MSM
+Learning project for Adobe Helix (EDS MSM).
 
 ## Environments
-- Preview: https://main--{repo}--{owner}.aem.page/
-- Live: https://main--{repo}--{owner}.aem.live/
+- Preview: https://main--eds-msm--abharti-rp.aem.page/
+- Live: https://main--eds-msm--abharti-rp.aem.live/
 
 ## Documentation
 

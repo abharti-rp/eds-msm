@@ -180,6 +180,38 @@
     ]
   },
   {
+    "id": "content-fragment",
+    "fields": [
+      {
+        "component": "aem-content-fragment",
+        "name": "reference",
+        "label": "Content Fragment Picker",
+        "valueType": "string",
+        "required": true,
+        "variationName": "contentFragmentVariation",
+        "validation": {
+          "rootPath": "/content/dam/ashu-eds-learning/articles"
+        }
+      },
+      {
+        "component": "text",
+        "name": "contentFragmentVariation",
+        "label": "Selected Variation",
+        "value": "",
+        "valueType": "string",
+        "description": "Persisted variation for publish; leave empty for master.",
+        "condition": {
+          "==": [
+            {
+              "var": "__alwaysFalse"
+            },
+            true
+          ]
+        }
+      }
+    ]
+  },
+  {
     "id": "fragment",
     "fields": [
       {
@@ -212,6 +244,39 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "video",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "source",
+        "label": "Video Source",
+        "description": "Link to YouTube, Vimeo, or MP4 video file"
+      },
+      {
+        "component": "aem-content",
+        "name": "image",
+        "label": "Placeholder Image",
+        "description": "Optional image to display before video playback"
+      },
+      {
+        "component": "multiselect",
+        "name": "style",
+        "label": "Video playback",
+        "description": "Video playback options",
+        "options": [
+          {
+            "name": "autoplay",
+            "value": "autoplay"
+          },
+          {
+            "name": "background",
+            "value": "background"
+          }
+        ]
       }
     ]
   }
