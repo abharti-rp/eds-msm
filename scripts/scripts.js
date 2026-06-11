@@ -11,6 +11,11 @@ import {
   loadCSS,
 } from './aem.js';
 
+// eslint-disable-next-line import/no-cycle
+import {
+  setPageLanguage,
+} from './utils.js';
+
 /**
  * Moves all the attributes from a given elmenet to another given element.
  * @param {Element} from the element to copy attributes from
@@ -135,7 +140,7 @@ export function decorateMain(main) {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-  document.documentElement.lang = 'en';
+  setPageLanguage();
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
