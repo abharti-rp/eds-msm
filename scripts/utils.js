@@ -84,7 +84,7 @@ export function getPathDetails() {
   }
   if (!langCode) langCode = 'en'; // default to en
   // substring before lang
-  const codeText = `${countryCode ? ('/' + countryCode) : ''}/${langCode}`;
+  const codeText = `${countryCode ? `/${countryCode}` : ''}/${langCode}`;
   const prefix = pathname.substring(0, pathname.indexOf(codeText)) || '';
   let suffix = pathname.substring(pathname.indexOf(codeText) + codeText.length) || '';
   if (suffix.startsWith('/')) suffix = suffix.replace(/^\/+/, '');
@@ -107,7 +107,7 @@ export function getLanguage() {
     if (!SUPPORTED_LANGUAGES.includes(langCode)) {
       lang = { langCode: 'en', countryCode: '' };
     } else {
-      lang = {langCode, countryCode};
+      lang = { langCode, countryCode };
     }
   }
   return lang;
@@ -134,7 +134,7 @@ export function computeLocalizedUrl(targetLang, tragetCountryCode) {
     if (!isContentPath) {
       // EDS: /{lang}/{suffix}
       const cleanSuffix = suffix ? suffix.replace(/^\/+/, '') : '';
-      const next = `${tragetCountryCode ? ('/' + tragetCountryCode) : ''}/${targetLang}${cleanSuffix ? `/${cleanSuffix}` : ''}`;
+      const next = `${tragetCountryCode ? `/${tragetCountryCode}` : ''}/${targetLang}${cleanSuffix ? `/${cleanSuffix}` : ''}`;
       return `${next}${query}${hash}`;
     }
 
@@ -143,7 +143,7 @@ export function computeLocalizedUrl(targetLang, tragetCountryCode) {
     const { pathname } = window.location;
     const parts = pathname.split('/');
     const siteNameFromPath = parts[2] || '';
-    const base = `/content/${siteNameFromPath}${tragetCountryCode ? ('/' + tragetCountryCode) : PATH_PREFIX}/${targetLang}`;
+    const base = `/content/${siteNameFromPath}${tragetCountryCode ? `/${tragetCountryCode}` : PATH_PREFIX}/${targetLang}`;
     // Normalize suffix:
     // - treat ".html" (language root) as empty
     // - strip any trailing .html from non-empty suffixes to avoid double extensions
@@ -181,12 +181,12 @@ export async function discoverLanguagesFromPlaceholders() {
         const langList = [];
         parsed.countryList.forEach((country) => {
           if (country && Array.isArray(country.languageList) && country.languageList.length) {
-            country.languageList.forEach((lang) => {
+            country.languageList.forEach((langItem) => {
               langList.push({
-                lang: lang.key,
-                langText: lang.text,
+                lang: langItem.key,
+                langText: langItem.text,
                 langReg: country.key,
-                langRegText: country.text
+                langRegText: country.text,
               });
             });
           }

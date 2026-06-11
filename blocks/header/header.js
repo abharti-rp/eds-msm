@@ -3,7 +3,7 @@ import { loadFragment } from '../fragment/fragment.js';
 import {
   getLanguage,
   discoverLanguagesFromPlaceholders,
-  computeLocalizedUrl
+  computeLocalizedUrl,
 } from '../../scripts/utils.js';
 /* eslint-disable max-len */
 
@@ -170,7 +170,7 @@ export default async function decorate(block) {
       langBtn.className = 'lang-button';
       langBtn.setAttribute('aria-haspopup', 'listbox');
       langBtn.setAttribute('aria-expanded', 'false');
-      langBtn.textContent = `${currentLang.langCode.toUpperCase()}${currentLang.countryCode ? ('-' + currentLang.countryCode.toUpperCase()) : ''}`;
+      langBtn.textContent = `${currentLang.langCode.toUpperCase()}${currentLang.countryCode ? `-${currentLang.countryCode.toUpperCase()}` : ''}`;
       const langMenu = document.createElement('ul');
       langMenu.className = 'lang-menu';
       langMenu.setAttribute('role', 'listbox');
@@ -197,7 +197,10 @@ export default async function decorate(block) {
       })();
 
       uniqueLangs.forEach((raw) => {
-        let displayCode, langCode, country, countryCode;
+        let displayCode;
+        let langCode;
+        let country;
+        let countryCode;
         if (isLangOnly) {
           const code = String(raw).replace('_', '-').toLowerCase();
           const [langPart, regionPart] = code.split('-');

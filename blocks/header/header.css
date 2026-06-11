@@ -323,6 +323,10 @@ header nav .nav-tools {
   text-decoration: none;
 }
 
+body.wehealthcare-theme header nav .nav-sections ul>li>a {
+  color: #000;
+}
+
 .lang-switcher .lang-menu a:hover {
   background: #f2f2f2;
 }
@@ -352,7 +356,7 @@ header nav .nav-tools {
 
 /* separator between items (not between country and code) */
 .lang-switcher .lang-menu .lang-item+.lang-item {
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: 1px solid rgb(0 0 0 / 8%);
 }
 
 /* remove global after adorners for language items */
@@ -362,10 +366,6 @@ header nav .nav-tools {
 
 header nav .nav-tools .cancel-container {
   display: none !important;
-}
-
-body.wehealthcare-theme header nav .nav-sections ul>li>a {
-  color: #000;
 }
 
 body.wehealthcare-theme header .nav-wrapper {
