@@ -290,8 +290,6 @@ async function annotateFormsForEditing(forms) {
 
 async function instrumentForms(mutationsList) {
   const formsEl = [];
-  const formBlocksEl = [];
-  
   mutationsList.forEach((mutation) => {
     // Check if the mutation type is 'childList' and if nodes are added
     if (mutation.type === 'childList' && mutation.addedNodes.length) {
@@ -300,41 +298,17 @@ async function instrumentForms(mutationsList) {
         if (node.nodeName.toLowerCase() === 'form') {
           formsEl.push(node);
         }
-        // Also check if it's a form block that needs decoration
+        // Also check for forms within added nodes
         if (node.nodeType === Node.ELEMENT_NODE) {
-          if (node.classList?.contains('form') && node.classList?.contains('block')) {
-            formBlocksEl.push(node);
-          }
-          // Check children too in case the block is nested
-          const formBlocks = node.querySelectorAll?.('.form.block');
-          if (formBlocks?.length) {
-            formBlocksEl.push(...formBlocks);
+          const nestedForms = node.querySelectorAll?.('form');
+          if (nestedForms?.length) {
+            formsEl.push(...nestedForms);
           }
         }
       });
     }
   });
-  
-  // Annotate any existing form elements
   annotateFormsForEditing(formsEl);
-  
-  // For newly added form blocks, ensure they get decorated and then annotated
-  for (const formBlock of formBlocksEl) {
-    if (!formBlock.querySelector('form')) {
-      // Form block hasn't been decorated yet, try to decorate it
-      try {
-        await decorate(formBlock);
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.warn('Error decorating form block:', error);
-      }
-    }
-    // Now annotate any forms in the block
-    const form = formBlock.querySelector('form');
-    if (form) {
-      annotateFormsForEditing([form]);
-    }
-  }
 }
 
 function cleanUp(content) {

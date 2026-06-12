@@ -524,20 +524,6 @@ export default async function decorate(block) {
   } else {
     ({ container, formDef } = extractFormDefinition(block));
   }
-
-  // Fallback: if no form definition found and this is a new block in editor,
-  // try to fetch from block data
-  if (!formDef && block.dataset.formpath) {
-    try {
-      const formDefResp = await fetch(`${block.dataset.formpath}.model.json`);
-      formDef = await formDefResp.json();
-      container = container || document.createElement('div');
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.warn('Failed to fetch form model from data attribute:', error);
-    }
-  }
-
   let source = 'aem';
   let rules = true;
   let form;
