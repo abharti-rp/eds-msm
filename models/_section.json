@@ -46,6 +46,8 @@
         "text",
         "image",
         "button",
+        "form",
+        "embed-adaptive-form",
         "title",
         "hero",
         "cards",
