@@ -1,0 +1,5 @@
+mountpoints:
+  /:
+    url: "https://author-p133739-e1306963.adobeaemcloud.com/bin/franklin.delivery/abharti-rp/eds-msm/main"
+    type: "markup"
+    suffix: ".html"
